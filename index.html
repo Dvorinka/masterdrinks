@@ -47,9 +47,9 @@ header {
     left: 0;
     width: 100%;
     z-index: 100;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 1);
     backdrop-filter: blur(10px);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 10px 0px #c9a95f;
     transition: var(--transition);
 }
 
@@ -131,8 +131,8 @@ nav ul li a:hover::after {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('') center/cover no-repeat;
-    opacity: 0.2;
+    background: url('./background_main.png') center/cover no-repeat;
+    filter:brightness(.6);
     animation: zoomBackground 20s infinite alternate;
 }
 
@@ -169,7 +169,7 @@ nav ul li a:hover::after {
 .hero-subtitle {
     font-size: 22px;
     margin-bottom: 40px;
-    color: var(--text-dark);
+    color: #dedede;
     animation: fadeInUp 1s ease 0.2s;
     animation-fill-mode: both;
 }
@@ -964,7 +964,7 @@ footer::before {
         <div class="container">
             <div class="hero-content">
                 <h1 class="hero-title">Premium Destiláty & Výjimečné Služby</h1>
-                <p class="hero-subtitle">Vaše důvěryhodný partner pro maloobchodní a velkoobchodní distribuci alkoholu. Objevte naši výjimečnou kolekci kvalitních destilátů.</p>
+                <p class="hero-subtitle">Váš důvěryhodný partner pro maloobchodní a velkoobchodní distribuci alkoholu. Objevte naši výjimečnou kolekci kvalitních destilátů.</p>
                 <a href="#products" class="btn">Prozkoumat naši kolekci</a>
             </div>
         </div>
@@ -1085,6 +1085,8 @@ footer::before {
             </div>
         </div>
     </section>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1554.2191141813225!2d17.476257923806973!3d49.070018978781754!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471314430011c0c7%3A0xe31bbc93e17aa486!2sMaster%20Drinks%2C%20s.r.o.!5e0!3m2!1sen!2scz!4v1745270716917!5m2!1sen!2scz%22" width="100%" height="600px" style="border:none;"></iframe>
+    
     <!-- Newsletter Section -->
     <section class="newsletter">
         <div class="container">
