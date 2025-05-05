@@ -1191,19 +1191,72 @@ footer::before {
                 navMenu.classList.toggle('show');
             });
             
-            // Carousel navigation
-            nextBtn.addEventListener('click', function() {
-                carousel.scrollBy({
-                    left: 300,
-                    behavior: 'smooth'
-                });
+            // Carousel functionality
+            let autoScrollInterval;
+            
+            function scrollCarousel(direction) {
+                const scrollAmount = 300;
+                const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+                
+                if (direction === 'next') {
+                    if (carousel.scrollLeft >= maxScroll) {
+                        // If at the end, smoothly scroll back to start
+                        carousel.scrollTo({
+                            left: 0,
+                            behavior: 'smooth'
+                        });
+                    } else {
+                        carousel.scrollBy({
+                            left: scrollAmount,
+                            behavior: 'smooth'
+                        });
+                    }
+                } else {
+                    if (carousel.scrollLeft <= 0) {
+                        // If at the start, smoothly scroll to end
+                        carousel.scrollTo({
+                            left: maxScroll,
+                            behavior: 'smooth'
+                        });
+                    } else {
+                        carousel.scrollBy({
+                            left: -scrollAmount,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            }
+
+            // Start auto-scrolling
+            function startAutoScroll() {
+                autoScrollInterval = setInterval(() => {
+                    scrollCarousel('next');
+                }, 3000); // Scroll every 3 seconds
+            }
+
+            // Stop auto-scrolling
+            function stopAutoScroll() {
+                clearInterval(autoScrollInterval);
+            }
+
+            // Initialize auto-scroll
+            startAutoScroll();
+
+            // Pause auto-scroll on hover
+            carousel.addEventListener('mouseenter', stopAutoScroll);
+            carousel.addEventListener('mouseleave', startAutoScroll);
+
+            // Button controls
+            nextBtn.addEventListener('click', () => {
+                stopAutoScroll();
+                scrollCarousel('next');
+                startAutoScroll();
             });
             
-            prevBtn.addEventListener('click', function() {
-                carousel.scrollBy({
-                    left: -300,
-                    behavior: 'smooth'
-                });
+            prevBtn.addEventListener('click', () => {
+                stopAutoScroll();
+                scrollCarousel('prev');
+                startAutoScroll();
             });
             
             // Feature card interactions
@@ -1237,5 +1290,7 @@ footer::before {
             });
         });
     </script>
+    
 </body>
 </html>
+``` 
