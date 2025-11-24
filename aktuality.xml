@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aktuality>
+    <polozka>
+        <typ>Sleva</typ>
+        <datum>24. listopadu 2025</datum>
+        <titulek>Black Friday týden - Slevy až 30%</titulek>
+        <popis>Připravili jsme pro vás speciální nabídku na vybrané whisky a rumy. Navštivte naši prodejnu a využijte slevy až 30% na prémiové destiláty.</popis>
+        <link>katalog-zbozi.html</link>
+        <linkText>Zobrazit nabídku</linkText>
+    </polozka>
+    <polozka>
+        <typ>Novinka</typ>
+        <datum>20. listopadu 2025</datum>
+        <titulek>Nová kolekce japonské whisky</titulek>
+        <popis>Právě jsme rozšířili naši nabídku o exkluzivní japonské whisky z palírny Yamazaki. Limitovaná edice je nyní k dispozici v našem sortimentu.</popis>
+        <link>katalog-zbozi.html#whisky</link>
+        <linkText>Prohlédnout si</linkText>
+    </polozka>
+    <polozka>
+        <typ>Akce</typ>
+        <datum>15. listopadu 2025</datum>
+        <titulek>Adventní degustace 2025</titulek>
+        <popis>Připravujeme tradiční adventní degustaci prémiových destilátů. Rezervujte si místo včas a objevte nové chutě před Vánoci.</popis>
+    </polozka>
+</aktuality>
