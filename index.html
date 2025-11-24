@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MasterDrinks | Premium Alcohol Distributor</title>
+    <title>MasterDrinks | Prémiová distribuce alkoholu</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <script data-goatcounter="https://tdvorak.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -945,14 +943,14 @@ footer::before {
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <img src="https://www.masterdrinks.cz/files/img/main/logo_dark.png" class="logo-img" alt="Logo MasterDrinks">
+                    <a href="index.html"><img src="https://www.masterdrinks.cz/files/img/main/logo_dark.png" class="logo-img" alt="Logo MasterDrinks"></a>
                 </div>
                 <nav>
                     <ul id="navMenu">
-                        <li><a href="#features">Objevit</a></li>
-                        <li><a href="#products">Produkty</a></li>
-                        <li><a href="#services">Služby</a></li>
-                        <li><a href="#contact">Kontakt</a></li>
+                        <li><a href="index.html" class="active">Domů</a></li>
+                        <li><a href="katalog-zbozi.html">Katalog zboží</a></li>
+                        <li><a href="kontakt.html">Kontakt</a></li>
+                        <li><a href="o-nas.html">O nás</a></li>
                     </ul>
                     <div class="hamburger" id="hamburger">
                         <i class="fas fa-bars"></i>
@@ -993,21 +991,21 @@ footer::before {
                     <p class="feature-desc">Prozkoumejte naši širokou nabídku premium destilátů, včetně bourbonu, brandy, džinu, koňaku, likérů, rumu, tequily, vodky a whisky.</p>
                 </div>
                 <!-- Services -->
-                <div class="feature-card" id="servicesCard">
+                <!-- <div class="feature-card" id="servicesCard">
                     <div class="feature-icon">
                         <i class="fas fa-truck"></i>
                     </div>
                     <h3 class="feature-title">Služby</h3>
                     <p class="feature-desc">Objevte naše možnosti doručování a pronájem stánků pro akce a speciální příležitosti.</p>
-                </div>
+                </div> -->
                 <!-- News & Promotions -->
-                <div class="feature-card" id="newsCard">
+                <!-- <div class="feature-card" id="newsCard">
                     <div class="feature-icon">
                         <i class="fas fa-tags"></i>
                     </div>
                     <h3 class="feature-title">Novinky & Akce</h3>
                     <p class="feature-desc">Zůstaňte v obraze s našimi nejnovějšími novinkami, speciálními nabídkami a propagačními akcemi.</p>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
@@ -1103,12 +1101,12 @@ footer::before {
         </div>
     </section>
     <!-- Footer -->
-    <footer id="contact">
+    <footer>
         <div class="container">
             <div class="footer-container">
                 <div class="footer-info">
                     <div class="footer-logo">
-                        <img src="https://www.masterdrinks.cz/files/img/main/logo_dark.png" class="logo-img" alt="Logo MasterDrinks">
+                        <a href="index.html"><img src="https://www.masterdrinks.cz/files/img/main/logo_dark.png" class="logo-img" alt="Logo MasterDrinks"></a>
                     </div>
                     <p>Premium distributor alkoholu nabízející maloobchodní a velkoobchodní služby s výjimečnou kolekcí kvalitních destilátů.</p>
                     <div class="social-links">
@@ -1121,21 +1119,20 @@ footer::before {
                 <div class="footer-links-section">
                     <h3 class="footer-title">Rychlé odkazy</h3>
                     <ul class="footer-links">
-                        <li><a href="#features">O nás</a></li>
-                        <li><a href="#products">Naše produkty</a></li>
-                        <li><a href="#services">Služby</a></li>
-                        <li><a href="#news">Akce</a></li>
-                        <li><a href="#contact">Kontakt</a></li>
+                        <li><a href="index.html">Domů</a></li>
+                        <li><a href="katalog-zbozi.html">Katalog zboží</a></li>
+                        <li><a href="o-nas.html">O nás</a></li>
+                        <li><a href="kontakt.html">Kontakt</a></li>
                     </ul>
                 </div>
                 <div class="footer-links-section">
                     <h3 class="footer-title">Produkty</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Bourbon & Whisky</a></li>
-                        <li><a href="#">Vodka & Džin</a></li>
-                        <li><a href="#">Rum & Tequila</a></li>
-                        <li><a href="#">Koňak & Brandy</a></li>
-                        <li><a href="#">Likéry</a></li>
+                        <li><a href="katalog-zbozi.html#whisky">Whisky</a></li>
+                        <li><a href="katalog-zbozi.html#vodky">Vodky</a></li>
+                        <li><a href="katalog-zbozi.html#rumy">Rumy</a></li>
+                        <li><a href="katalog-zbozi.html#tequily">Tequily</a></li>
+                        <li><a href="katalog-zbozi.html#likery">Likéry</a></li>
                     </ul>
                 </div>
                 <div class="footer-contact">
@@ -1266,8 +1263,15 @@ footer::before {
             featureCards.forEach(card => {
                 card.addEventListener('click', function() {
                     const id = this.id;
-                    // Add your navigation or modal logic here
-                    console.log(`Clicked on ${id}`);
+                    if (id === 'aboutCard') {
+                        window.location.href = 'o-nas.html';
+                    } else if (id === 'productsCard') {
+                        window.location.href = 'katalog-zbozi.html';
+                    } else if (id === 'servicesCard') {
+                        window.location.href = 'index.html#services';
+                    } else if (id === 'newsCard') {
+                        console.log('News & Promotions clicked');
+                    }
                 });
             });
 

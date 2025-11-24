@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MasterDrinks | Detail produktu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script data-goatcounter="https://tdvorak.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+:root {
+    --primary: #ffffff;
+    --secondary: #f5f5f5;
+    --accent: #c9a95f;
+    --accent-dark: #b89142;
+    --text: #1a1a2e;
+    --text-dark: #444444;
+    --muted: #898989;
+    --success: #0f9d58;
+    --danger: #d93025;
+    --transition: all 0.3s ease;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { 
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; 
+  background: linear-gradient(135deg, var(--primary), var(--secondary)); 
+  color: var(--text); 
+  min-height: 100vh; 
+  overflow-x: hidden; 
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.container { width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 20px; }
+
+header { 
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  z-index: 100; 
+  background: rgba(255,255,255,0.98); 
+  backdrop-filter: blur(12px); 
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+  transition: var(--transition); 
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+.header-content { display: flex; justify-content: space-between; align-items: center; padding: 20px; }
+.logo { display: flex; align-items: center; }
+.logo-img { width: 85px; }
+nav ul { display: flex; list-style: none; }
+nav ul li { margin-left: 30px; }
+nav ul li a { text-decoration: none; color: var(--text); font-weight: 500; font-size: 16px; position: relative; transition: var(--transition); }
+nav ul li a:hover { color: var(--accent); }
+nav ul li a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--accent); transition: var(--transition); }
+nav ul li a:hover::after { width: 100%; }
+.hamburger { display: none; cursor: pointer; font-size: 24px; color: var(--accent); }
+
+.page { padding-top: 120px; }
+
+.bread-nav { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; font-size: 14px; color: var(--text-dark); margin-bottom: 24px; }
+.bread-nav a { color: var(--text-dark); text-decoration: none; padding-right: 10px; position: relative; }
+.bread-nav a:hover { color: var(--accent); }
+.bread-nav a:not(:last-of-type)::after { content: '/'; position: absolute; right: -8px; color: var(--muted); }
+
+.product-detail { 
+  padding: 40px 0 80px; 
+  position: relative; 
+  min-height: calc(100vh - 120px);
+}
+.product-detail-grid { 
+  display: grid; 
+  grid-template-columns: 1.1fr 1.2fr; 
+  gap: 48px; 
+  align-items: start; 
+  max-width: 1200px; 
+  margin: 0 auto;
+  padding: 20px;
+}
+.product-detail-img { 
+  background: linear-gradient(135deg, rgba(201,169,95,.04), rgba(201,169,95,.01)); 
+  border: 1px solid rgba(201,169,95,.1); 
+  border-radius: 16px; 
+  overflow: hidden; 
+  box-shadow: 0 20px 40px rgba(0,0,0,.06); 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  min-height: 480px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+.product-detail-img:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 25px 50px rgba(0,0,0,.1);
+}
+.product-detail-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.product-detail-info h1 { 
+  font-family: 'Playfair Display', serif; 
+  font-size: 36px; 
+  font-weight: 700; 
+  line-height: 1.2; 
+  margin: 0 0 16px 0;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  position: relative;
+  padding-bottom: 16px;
+}
+
+.product-detail-info h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+  border-radius: 3px;
+}
+.product-detail-info h1 span { 
+  display: block;
+  font-family: 'Montserrat', sans-serif; 
+  font-weight: 500; 
+  font-size: 16px; 
+  color: var(--muted); 
+  margin: 8px 0 0 0;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-size: 15px;
+  opacity: 0.8;
+}
+.rating-cont { 
+  display: flex; 
+  align-items: center; 
+  gap: 12px; 
+  margin: 24px 0 28px;
+  padding: 12px 0;
+  border-top: 1px dashed rgba(0,0,0,0.08);
+  border-bottom: 1px dashed rgba(0,0,0,0.08);
+}
+.stars { color: var(--accent); font-size: 18px; letter-spacing: 2px; }
+.rating-count { color: var(--muted); font-size: 14px; }
+
+.specs-grid { 
+  display: grid; 
+  grid-template-columns: 200px 1fr; 
+  gap: 16px 24px; 
+  margin: 24px 0 32px; 
+  padding: 0 0 8px;
+}
+.spec-label { 
+  font-size: 14px; 
+  color: var(--muted); 
+  font-weight: 600; 
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  opacity: 0.8;
+}
+
+.spec-label::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin-right: 8px;
+  opacity: 0.6;
+}
+.spec-value { 
+  font-size: 15px; 
+  color: var(--text); 
+  font-weight: 500;
+  line-height: 1.6;
+}
+.spec-value a { color: var(--text); text-decoration: none; border-bottom: 1px dashed rgba(201,169,95,.6); }
+.spec-value a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+.price-large { 
+  font-size: 32px; 
+  font-weight: 700; 
+  color: var(--text);
+  margin: 8px 0 0;
+  display: flex;
+  align-items: center;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  letter-spacing: -0.01em;
+}
+.price-large .vat { margin-left: 6px; font-size: 14px; color: var(--muted); font-weight: 600; }
+
+.badge { 
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px; 
+  border-radius: 50px; 
+  font-size: 12px; 
+  font-weight: 700; 
+  letter-spacing: 0.03em; 
+  border: 1px solid transparent;
+  line-height: 1;
+  text-transform: uppercase;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+.badge-in { 
+  background: rgba(15,157,88,.08); 
+  color: var(--success); 
+  border-color: rgba(15,157,88,.15);
+  padding-left: 10px;
+}
+
+.badge-in::before {
+  content: '•';
+  font-size: 18px;
+  line-height: 0;
+  margin-right: 6px;
+  color: var(--success);
+  animation: pulse 2s infinite;
+}
+.badge-out { background: rgba(217,48,37,.1); color: var(--danger); border-color: rgba(217,48,37,.25); }
+
+.detail-actions { margin-top: 18px; display: flex; gap: 12px; }
+.btn { 
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px; 
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark)); 
+  color: white; 
+  font-size: 15px; 
+  font-weight: 700; 
+  text-decoration: none; 
+  border-radius: 8px; 
+  box-shadow: 0 4px 15px rgba(201, 169, 95, 0.3); 
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: none; 
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.03em;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn:hover::before {
+  opacity: 1;
+}
+.btn:hover { 
+  transform: translateY(-2px); 
+  box-shadow: 0 8px 25px rgba(201, 169, 95, 0.4);
+  filter: brightness(1.05);
+}
+
+.product-desc { 
+  max-width: 900px; 
+  margin: 48px auto 0; 
+  font-size: 16px; 
+  line-height: 1.8; 
+  color: var(--text-dark);
+  padding: 0 20px;
+}
+
+.product-desc p {
+  margin: 0 0 1.5em 0;
+  font-weight: 400;
+  color: var(--text);
+  opacity: 0.95;
+}
+
+.product-desc p:last-child {
+  margin-bottom: 0;
+}
+
+.newsletter { 
+  padding: 100px 0; 
+  background: linear-gradient(to bottom, rgba(255,255,255,0.9), var(--primary)); 
+  position: relative; 
+  margin-top: 60px;
+  border-top: 1px solid rgba(0,0,0,0.03);
+}
+.newsletter::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 70% 50%, rgba(201,169,95,.05), transparent 70%); }
+.newsletter-container { max-width: 600px; margin: 0 auto; text-align: center; position: relative; }
+.newsletter-title { 
+  font-family: 'Playfair Display', serif;
+  font-size: 34px; 
+  margin-bottom: 16px; 
+  color: var(--text);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+.newsletter-desc { 
+  font-size: 17px; 
+  color: var(--text-dark); 
+  margin: 0 auto 30px; 
+  line-height: 1.7; 
+  max-width: 600px;
+  opacity: 0.9;
+}
+.newsletter-form { 
+  display: flex; 
+  gap: 12px; 
+  max-width: 520px; 
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.newsletter-input { 
+  flex: 1; 
+  padding: 16px 20px; 
+  border: 1px solid rgba(201,169,95,0.3); 
+  border-radius: 8px; 
+  background: white; 
+  color: var(--text); 
+  font-size: 15px; 
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+  transition: all 0.3s ease; 
+  font-family: 'Montserrat', sans-serif;
+  height: 54px;
+}
+
+.newsletter-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(201, 169, 95, 0.2);
+}
+.newsletter-btn { 
+  padding: 0 28px; 
+  background: var(--accent); 
+  color: white; 
+  font-size: 15px; 
+  font-weight: 600; 
+  border: none; 
+  border-radius: 8px; 
+  cursor: pointer; 
+  transition: all 0.3s ease; 
+  font-family: 'Montserrat', sans-serif;
+  height: 54px;
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(201, 169, 95, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.newsletter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(201, 169, 95, 0.4);
+  filter: brightness(1.05);
+}
+
+footer { 
+  background: var(--primary); 
+  padding: 80px 0 30px; 
+  position: relative; 
+  overflow: hidden; 
+  margin-top: 60px;
+}
+footer::before { 
+  content: ''; 
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 1px; 
+  background: linear-gradient(90deg, transparent, rgba(201, 169, 95, 0.3), transparent);
+}
+.footer-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+.footer-logo { display: flex; align-items: center; margin-bottom: 20px; }
+.footer-title { font-size: 20px; margin-bottom: 20px; color: var(--accent); position: relative; padding-bottom: 10px; }
+.footer-title::after { content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 2px; background: var(--accent); }
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 10px; }
+.footer-links a { color: var(--text-dark); text-decoration: none; font-size: 14px; transition: var(--transition); display: inline-block; }
+.footer-links a:hover { color: var(--accent); transform: translateX(5px); }
+.footer-contact p { display: flex; align-items: center; color: var(--text-dark); margin-bottom: 12px; font-size: 14px; }
+.footer-contact i { color: var(--accent); margin-right: 8px; }
+.footer-bottom { text-align: center; margin-top: 30px; color: var(--muted); font-size: 14px; }
+
+/* Age Verification Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.age-verification {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(245, 245, 245, 0.95));
+    border-radius: 10px;
+    padding: 40px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(201, 169, 95, 0.2);
+    animation: modalFadeIn 0.5s ease;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.age-icon {
+    font-size: 60px;
+    color: var(--accent);
+    margin-bottom: 20px;
+}
+
+.age-title {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.age-text {
+    font-size: 16px;
+    color: var(--text-dark);
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.age-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.age-btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.age-yes {
+    background: var(--accent);
+    color: var(--primary);
+}
+
+.age-yes:hover {
+    background: var(--accent-dark);
+    transform: translateY(-3px);
+}
+
+.age-no {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text);
+}
+
+.age-no:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 1024px) {
+  .product-detail { padding: 30px 0 60px; }
+  .product-detail-grid { 
+    grid-template-columns: 1fr;
+    gap: 40px;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .product-detail-img { 
+    min-height: 400px;
+    max-width: 500px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .specs-grid { 
+    grid-template-columns: 160px 1fr; 
+    gap: 14px 20px;
+  }
+  .product-detail-info h1 { 
+    font-size: 32px;
+  }
+  .product-desc {
+    padding: 0;
+  }
+}
+@media (max-width: 768px){
+  nav ul {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(255,255,255,.95);
+    padding: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,.2);
+    transform: translateY(-10px);
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition);
+  }
+  nav ul.show{
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+    display: flex;
+  }
+  nav ul li { margin: 10px 0; }
+  .hamburger{ display: block; }
+}
+@media (max-width: 768px) {
+  .page { padding-top: 90px; }
+  .header-content { padding: 14px 20px; }
+  .product-detail-info h1 { 
+    font-size: 28px;
+    padding-bottom: 12px;
+  }
+  .product-detail-info h1::after {
+    height: 2px;
+  }
+  .product-detail-info h1 span {
+    font-size: 14px;
+  }
+  .specs-grid { 
+    grid-template-columns: 1fr; 
+    gap: 12px;
+  }
+  .spec-label { 
+    opacity: 0.9;
+    margin-top: 8px;
+  }
+  .spec-label:first-child {
+    margin-top: 0;
+  }
+  .rating-cont {
+    margin: 20px 0;
+    padding: 10px 0;
+  }
+  .price-large {
+    font-size: 28px;
+    margin: 12px 0 0;
+  }
+  .detail-actions {
+    margin-top: 24px;
+  }
+  .btn {
+    width: 100%;
+    padding: 14px 20px;
+  }
+  .newsletter {
+    padding: 70px 0;
+    margin-top: 40px;
+  }
+  .newsletter-title {
+    font-size: 28px;
+  }
+  .newsletter-form {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .newsletter-input,
+  .newsletter-btn {
+    width: 100%;
+    height: 50px;
+  }
+}
+    </style>
+</head>
+<body>
+    <!-- Age Verification Modal -->
+    <div class="modal-overlay" id="ageModal">
+        <div class="age-verification">
+            <div class="age-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h2 class="age-title">Ověření věku</h2>
+            <p class="age-text">Vítejte na MasterDrinks. Pro vstup na tuto stránku musíte být plnoletí podle zákonů vaší země. Kliknutím na "Ano" potvrzujete, že je vám alespoň 18 let.</p>
+            <div class="age-buttons">
+                <button class="age-btn age-yes" id="ageYes">Ano, je mi 18+</button>
+                <button class="age-btn age-no" id="ageNo">Ne, je mi méně než 18</button>
+            </div>
+        </div>
+    </div>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html"><img src="https://www.masterdrinks.cz/files/img/main/logo_dark.png" class="logo-img" alt="Logo MasterDrinks"></a>
+                </div>
+                <nav>
+                    <ul id="navMenu">
+                        <li><a href="index.html" class="active">Domů</a></li>
+                        <li><a href="katalog-zbozi.html">Katalog zboží</a></li>
+                        <li><a href="kontakt.html">Kontakt</a></li>
+                        <li><a href="o-nas.html">O nás</a></li>
+                    </ul>
+                    <div class="hamburger" id="hamburger">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="page">
+        <div class="container">
+            <nav class="bread-nav">
+                <a href="katalog-zbozi.html">Katalog</a>
+                <a href="#">Rumy</a>
+                <a href="#">A. H. Riise</a>
+                <span>A. H. Riise Rum Non Plus Ultra</span>
+            </nav>
+
+            <section class="product-detail">
+                <div class="product-detail-grid">
+                    <div class="product-detail-img">
+                        <img src="https://www.masterdrinks.cz/files/img/products_02/rum-ah-riise-non-plus-ultra.jpg" alt="A. H. Riise Rum Non Plus Ultra">
+                    </div>
+                    <div class="product-detail-info">
+                        <h1>A. H. Riise Rum Non Plus Ultra <span>(0,7l/42%)</span></h1>
+                        <div class="rating-cont">
+                            <div class="stars" aria-label="Hodnocení: 5 z 5">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span class="rating-count">hodnoceno 2x</span>
+                        </div>
+                        <div class="specs-grid">
+                            <div class="spec-label">Výrobce/značka:</div>
+                            <div class="spec-value"><a href="#">A. H. Riise</a></div>
+                            <div class="spec-label">Obsah alkoholu %:</div>
+                            <div class="spec-value">42</div>
+                            <div class="spec-label">Země:</div>
+                            <div class="spec-value"><a href="#">Panenské Ostrovy</a></div>
+                            <div class="spec-label">Aktuální stav:</div>
+                            <div class="spec-value"><span class="badge badge-in">2 ks</span></div>
+                            <div class="spec-label">Cena:</div>
+                            <div class="spec-value price-large">1 999 Kč <span class="vat">s DPH</span></div>
+                        </div>
+                        <div class="detail-actions">
+                            <a href="katalog-zbozi.html" class="btn">Zpět na katalog</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-desc">
+                    <p>A.H. Riise Non Plus Ultra je ultimátní edice toho nejlepšího, co může lékarník Riise v téhle chvíli nabídnout. Nejlepší reservy zrající průměrně 30 let metodou Solera ve vybraných sudech. Krásné balení, tmavá mahagonová barva a hra lahodných aromat čerstvé melasy, pomerančů a dalšího exotického ovoce. Jeho chuť je silná a velmi bohatá s nádechem pomeranče, přírodního cukru a tabáku, v závěru zakončena lehce kořeněnými ale přesto smetanovým a sladkým chuťovým ocasem. Plný a delikátní rum pro vzácné chvíle a osobnosti.</p>
+                </div>
+            </section>
+        </div>
+
+        <section class="newsletter">
+            <div class="container">
+                <div class="newsletter-container">
+                    <h2 class="newsletter-title">Zůstaňte informováni</h2>
+                    <p class="newsletter-desc">Přihlaste se k odběru našeho newsletteru, abyste dostávali exkluzivní nabídky, novinky o příchodu nových produktů a odborné doporučení.</p>
+                    <form class="newsletter-form">
+                        <input type="email" class="newsletter-input" placeholder="Váš email" required>
+                        <button type="submit" class="newsletter-btn">Přihlásit</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-info">
+                    <div class="footer-logo">
+                        <a href="index.html"><img src="https://www.masterdrinks.cz/files/img/main/logo_dark.png" class="logo-img" alt="Logo MasterDrinks"></a>
+                    </div>
+                    <p>Premium distributor alkoholu nabízející maloobchodní a velkoobchodní služby s výjimečnou kolekcí kvalitních destilátů.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links-section">
+                    <h3 class="footer-title">Rychlé odkazy</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Domů</a></li>
+                        <li><a href="katalog-zbozi.html">Katalog zboží</a></li>
+                        <li><a href="o-nas.html">O nás</a></li>
+                        <li><a href="kontakt.html">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-section">
+                    <h3 class="footer-title">Produkty</h3>
+                    <ul class="footer-links">
+                        <li><a href="katalog-zbozi.html#whisky">Whisky</a></li>
+                        <li><a href="katalog-zbozi.html#vodky">Vodky</a></li>
+                        <li><a href="katalog-zbozi.html#rumy">Rumy</a></li>
+                        <li><a href="katalog-zbozi.html#tequily">Tequily</a></li>
+                        <li><a href="katalog-zbozi.html#likery">Likéry</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3 class="footer-title">Kontaktujte nás</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Sokolovská 758, 686 01 Uherské Hradiště</p>
+                    <p><i class="fas fa-phone"></i> +420 602 702 129</p>
+                    <p><i class="fas fa-envelope"></i> masterdrinks@seznam.cz</p>
+                    <p><i class="fas fa-clock"></i> Po-Pá: 10:00 - 20:00, So: 12:00 - 18:00</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>MasterDrinks, s.r.o. IČO: 28326369 | DIČ: CZ28326369. Všechna práva vyhrazena. Pijte zodpovědně.</p>
+                <a style="color: #1a1a1a; text-decoration: none; font-weight: bold;" href="tdvorak.dev" target="_blank">&copy; 2025 TDvorak.dev</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const ageModal = document.getElementById('ageModal');
+        const ageYesBtn = document.getElementById('ageYes');
+        const ageNoBtn = document.getElementById('ageNo');
+        
+        // Age verification state
+        const isAgeVerified = localStorage.getItem('ageVerified');
+        if (isAgeVerified) {
+            ageModal.style.display = 'none';
+        }
+
+        ageYesBtn.addEventListener('click', function() {
+            localStorage.setItem('ageVerified', 'true');
+            ageModal.style.animation = 'modalFadeOut 0.5s ease forwards';
+            setTimeout(() => { ageModal.style.display = 'none'; }, 500);
+        });
+
+        ageNoBtn.addEventListener('click', function() {
+            window.onbeforeunload = function(event) { return null; };
+            window.location.href = 'about:blank';
+        });
+        
+        // Mobile menu toggle
+        if (hamburger) {
+          hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('show');
+          });
+        }
+      });
+    </script>
+</body>
+</html>
